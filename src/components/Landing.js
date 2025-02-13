@@ -1,23 +1,19 @@
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import InsightsIcon from '@mui/icons-material/Insights';
 import StorageIcon from '@mui/icons-material/Storage';
-import {
-    Avatar,
-    Box,
-    Button,
-    Card,
-    CardContent,
-    Grid,
-    Typography,
-} from '@mui/material';
+import { Avatar, Box, Button, Card, CardContent, Grid, Typography } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
     const navigate = useNavigate();
 
-    const handleLogin = () => {
-        navigate('/login');
+    const handleLogin = (role) => {
+        if (role === 'user') {
+            navigate('/userlogin');
+        } else {
+            navigate('/login');  // Assuming the admin login route is '/admin-login'
+        }
     };
 
     return (
@@ -68,30 +64,59 @@ const LandingPage = () => {
                     Experience next-level electronic health record management with our
                     modern, AI-driven platform.
                 </Typography>
-                <Button
-                    variant="contained"
-                    onClick={handleLogin}
-                    sx={{
-                        backgroundColor: '#00E0FF',
-                        color: '#0D1117',
-                        padding: '12px 40px',
-                        borderRadius: '30px',
-                        fontSize: '16px',
-                        fontWeight: 'bold',
-                        boxShadow: '0px 8px 20px rgba(0, 224, 255, 0.4)',
-                        animation: 'pulse 2s infinite',
-                        '@keyframes pulse': {
-                            '0%': { transform: 'scale(1)' },
-                            '50%': { transform: 'scale(1.05)' },
-                            '100%': { transform: 'scale(1)' },
-                        },
-                        '&:hover': {
-                            backgroundColor: '#00A3CC',
-                        },
-                    }}
-                >
-                    Proceed to Login
-                </Button>
+
+                {/* Choose Login Type Section */}
+                <Box>
+                    <Button
+                        variant="contained"
+                        onClick={() => handleLogin('user')}
+                        sx={{
+                            backgroundColor: '#00E0FF',
+                            color: '#0D1117',
+                            padding: '12px 40px',
+                            borderRadius: '30px',
+                            fontSize: '16px',
+                            fontWeight: 'bold',
+                            boxShadow: '0px 8px 20px rgba(0, 224, 255, 0.4)',
+                            animation: 'pulse 2s infinite',
+                            '@keyframes pulse': {
+                                '0%': { transform: 'scale(1)' },
+                                '50%': { transform: 'scale(1.05)' },
+                                '100%': { transform: 'scale(1)' },
+                            },
+                            '&:hover': {
+                                backgroundColor: '#00A3CC',
+                            },
+                            marginRight: '20px',
+                        }}
+                    >
+                        User Login
+                    </Button>
+                    <Button
+                        variant="contained"
+                        onClick={() => handleLogin('admin')}
+                        sx={{
+                            backgroundColor: '#00E0FF',
+                            color: '#0D1117',
+                            padding: '12px 40px',
+                            borderRadius: '30px',
+                            fontSize: '16px',
+                            fontWeight: 'bold',
+                            boxShadow: '0px 8px 20px rgba(0, 224, 255, 0.4)',
+                            animation: 'pulse 2s infinite',
+                            '@keyframes pulse': {
+                                '0%': { transform: 'scale(1)' },
+                                '50%': { transform: 'scale(1.05)' },
+                                '100%': { transform: 'scale(1)' },
+                            },
+                            '&:hover': {
+                                backgroundColor: '#00A3CC',
+                            },
+                        }}
+                    >
+                        Admin Login
+                    </Button>
+                </Box>
             </Box>
 
             {/* Features Section */}

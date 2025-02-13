@@ -15,6 +15,8 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Tesseract from 'tesseract.js';
 
 const steps = ['Adding Details', 'Upload Scan', 'Result'];
@@ -57,12 +59,16 @@ const AddRecordForm = () => {
             if (formData.condition === '') { formData.condition = 'Normal' }
             if (formData.remarks === '') { formData.remarks = 'No remarks' }
             const response = await axios.post('http://localhost:5000/api/records', formData);
-            alert('Record saved successfully!');
-            console.log('Response:', response.data);
+            toast.success(response.data.message, {
+                position: "top-right"
+            });
+            // console.log('Response:', response.data);
             window.location.reload();
         } catch (error) {
             console.error('Error saving record:', error);
-            alert(error);
+            toast.error('Failed to save record. Please try again.', {
+                position: "top-right"
+            });
         }
     };
 
